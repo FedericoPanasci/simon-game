@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import './App.css';
+import Modal from 'react-modal';
 
 function App() {
   const [playerColor, setPlayerColor] = useState([]);
@@ -10,7 +11,13 @@ function App() {
   const [buttonColorDisable, setButtonColorDisable] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
   const [levelCount, setLevelCount] = useState(true);
+  const [record, setRecord] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [playerName, setPlayerName] = useState('');
   const colors = ['red', 'green', 'yellow', 'blue'];
+  const [tableRecord, setTableRecord] = useState([]);
+  
+  let subtitle;
   
   const colorsDefault = ['#8A3B3B', '#5EAB5E', '#B4B43B', '#3A70A5'];
   const colorsClicked = ['#FF0000', '#00FF00', '#FFFF00', '#00BFFF'];
@@ -20,7 +27,6 @@ function App() {
     yellow: '#B4B43B',
     blue: '#3A70A5'
   });
-  const colorLose = 'white';
 
   const playSound = (color) => {
     const audio = new Audio(`/sound/audio-${color}.mp3`);
@@ -71,9 +77,6 @@ function App() {
         index++;
         if (index >= comColor.length) {
           clearInterval(interval);
-          setTimeout(() => {
-            setButtonColorDisable(false);
-          }, 1000);
         }
       }, 300);
     }, 1000);
@@ -104,6 +107,10 @@ function App() {
     if (playerColor[playerColor.length - 1] !== comColor[playerColor.length - 1]) {
       const audio = new Audio(`/sound/error.wav`);
       audio.play();
+      if (comColor.length > record) {
+        setRecord(comColor.length)
+        setShowModal(true);
+      }
       flashColors(3);
       setButtonIniciar(false);
       setButtonColorDisable(true);
@@ -111,6 +118,7 @@ function App() {
       return;
   } else {
     if (playerColor.length === comColor.length) {
+      setButtonColorDisable(true);
       setTimeout(() => {
         const audio = new Audio(`/sound/success.wav`);
         audio.play();
@@ -142,6 +150,31 @@ function App() {
     setDarkMode(!darkMode);
   }
 
+  function closeModal() {
+    setShowModal(false);
+  }
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  const handlePlayerName = (e) => {
+    setPlayerName(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTableRecord([{name:playerName, score:record}, ...tableRecord])
+    closeModal();
+  }
+
   return (
     <div className="App">
       <div>
@@ -166,11 +199,52 @@ function App() {
         </h2>
         <ul style={{ justifyContent:'center', textAlign:'justify', marginLeft:'-25px'}}>
           <li>Haz clic en "Iniciar" para comenzar el juego.</li>
-          <li>En cada nivel, se agregará un nuevo color a la secuencia.</li>
+          <li>En cada nivel, se agregará un nuevo color a la secuencia anterior.</li>
           <li>Para avanzar al siguiente nivel, completa la secuencia sin cometer errores.</li>
-          <li>Si te equivocas, volverás al principio del juego y deberás hacer clic en "Iniciar" para comenzar de nuevo.</li>
+          <li>Si te equivocas, volverás al principio del juego y deberás hacer clic en "Iniciar" para comenzar nuevamente.</li>
         </ul>  
       </div>
+      <div>
+      <Modal
+        isOpen={showModal}
+        ariaHideApp={false}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <button onClick={closeModal} style={{ backgroundColor:'#FF5454', marginLeft:'18.3rem', border:'0px none #FF5454', borderRadius:'3px', width:'25px', height:'25px', color:'white'}}>X</button>
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>!Haz llegado a un nuevo record!</h2>
+        <p>
+          {`Tu secuencia llego al nivel ${record} ¿Queres registrarlo?`}
+        </p>
+        <form onSubmit={handleSubmit} style={{display:'flex', justifyContent:'space-evenly'}}>
+          <input type='text' value={playerName} placeholder='Escribe tu nombre' onChange={handlePlayerName}/>
+          <button type='submit' style={{backgroundColor:'#1D75BE', border:'0px none #1D75BE', borderRadius:'3px', color:'white'}}>Registrar</button>
+        </form>
+      </Modal>
+      </div>
+      {tableRecord.length > 0 && <div>
+        <h1>Tabla de records</h1>
+        <table style={{margin:'auto'}}>
+          <thead>
+            <tr>
+              <th scope="col">Jugador</th>
+              <th scope="col">Nivel</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              tableRecord.map((player, index) => (
+                <tr key={index}>
+                  <td>{player.name}</td>
+                  <td>{player.score}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      }
     </div>
   );
 }

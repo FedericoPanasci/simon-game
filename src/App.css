@@ -17,40 +17,38 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  /* border: 0,5mm solid black; */
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .button-iniciar {
-  background-color: #FFD500; /* Color de fondo verde */
+  background-color: #FFD500;
   color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-weight: bold; /* Hace que la letra sea más gruesa */
-  font-family: 'Roboto', sans-serif; /* Cambia la fuente a Roboto */
+  font-weight: bold; 
+  font-family: 'Roboto', sans-serif; 
   font-size: 25px;
   margin: 4px 2px;
   cursor: pointer;
   border: none;
-  border-radius: 15px; /* Bordes redondeados */
-  transition-duration: 0.4s; /* Duración de la transición */
+  border-radius: 15px;
+  transition-duration: 0.4s;
 }
-
 .button-iniciar:hover {
-  background-color: #FAB731; /* Cambio de color al pasar el cursor sobre el botón */
+  background-color: #FAB731;
 }
 
 .button-tema {
-  background-color: #008CBA; /* Color de fondo azul */
+  background-color: #008CBA;
   border: none;
-  border-radius: 15px; /* Bordes redondeados */
+  border-radius: 15px; 
   color: black;
   padding: 15px 32px;
-  font-weight: bold; /* Hace que la letra sea más gruesa */
-  font-family: 'Roboto', sans-serif; /* Cambia la fuente a Roboto */
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
   font-size: 25px;
   text-align: center;
   text-decoration: none;
@@ -58,9 +56,50 @@
   font-size: 26px;
   margin: 4px 2px;
   cursor: pointer;
-  transition-duration: 0.4s; /* Duración de la transición */
+  transition-duration: 0.4s;
 }
 
 .button-tema:hover {
-  background-color: #005f76; /* Cambio de color al pasar el cursor sobre el botón */
+  background-color: #005f76;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(0, 0, 0);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+  font-weight: bold;
+}
+
+thead,
+tfoot {
+  background-color: rgb(0, 179, 255);
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+}
+
+td:last-of-type {
+  text-align: center;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: rgb(237 238 242);
+}
+
+tfoot th {
+  text-align: right;
+}
+
+tfoot td {
+  font-weight: bold;
 }
