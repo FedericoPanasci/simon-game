@@ -6,6 +6,7 @@ import TableRecordComponent from "./components/tableRecord/index.tsx";
 import ITableRecord from "./interface/ITableRecord";
 import ModalRecord from "./components/modalRecord/index.tsx";
 import RulesComponent from "./components/rulesComponent/index.tsx";
+import ColorButton from "./components/colorButton/index.tsx";
 
 type Color = "red" | "green" | "yellow" | "blue";
 
@@ -24,13 +25,13 @@ function App() {
   const colors: Color[] = ["red", "green", "yellow", "blue"];
   const [tableRecord, setTableRecord] = useState<ITableRecord[]>([]);
 
-  const colorsDefault = ["#8A3B3B", "#5EAB5E", "#B4B43B", "#3A70A5"];
-  const colorsClicked = ["#FF0000", "#00FF00", "#FFFF00", "#00BFFF"];
+  const colorsDefault = ["#6E1F1F", "#2E6B2E", "#7F7F24", "#1E4B70"];
+  const colorsClicked = ["#FF1744", "#00E676", "#FFEB3B", "#00B0FF"];
   const [buttonColors, setButtonColors] = useState({
-    red: "#8A3B3B",
-    green: "#5EAB5E",
-    yellow: "#B4B43B",
-    blue: "#3A70A5",
+    red: "#6E1F1F",
+    green: "#2E6B2E",
+    yellow: "#7F7F24",
+    blue: "#1E4B70",
   });
 
   const playSound = (color: Color) => {
@@ -84,7 +85,7 @@ function App() {
           clearInterval(interval);
         }
       }, 300);
-    }, 1000);
+    }, 500);
   }, [comColor]);
 
   const flashColors = (count: number) => {
@@ -145,7 +146,7 @@ function App() {
     showSequence();
     setTimeout(() => {
       setButtonColorDisable(false);
-    }, (comColor.length + 1) * 1000);
+    }, (comColor.length) * 700);
   };
 
   const playGame = () => {
@@ -198,59 +199,29 @@ function App() {
         className="button-container"
         style={{
           backgroundColor: darkMode ? "black" : "white",
-          borderRadius: "20%",
+          borderRadius: "25%",
           width: "310px",
           height: "310px",
           marginTop: "10px",
           padding: "10px",
         }}
       >
-        <button
-          className="button red"
-          onClick={() => handleClick("red")}
-          style={{
-            backgroundColor:
-              buttonColor === "red" && isClicked ? "#FF0000" : buttonColors.red,
-            cursor: buttonColorDisable ? "default" : "pointer",
-          }}
-          disabled={buttonColorDisable}
-        ></button>
-        <button
-          className="button green"
-          onClick={() => handleClick("green")}
-          style={{
-            backgroundColor:
-              buttonColor === "green" && isClicked
-                ? "#00FF00"
-                : buttonColors.green,
-            cursor: buttonColorDisable ? "default" : "pointer",
-          }}
-          disabled={buttonColorDisable}
-        ></button>
-        <button
-          className="button yellow"
-          onClick={() => handleClick("yellow")}
-          style={{
-            backgroundColor:
-              buttonColor === "yellow" && isClicked
-                ? "#FFFF00"
-                : buttonColors.yellow,
-            cursor: buttonColorDisable ? "default" : "pointer",
-          }}
-          disabled={buttonColorDisable}
-        ></button>
-        <button
-          className="button blue"
-          onClick={() => handleClick("blue")}
-          style={{
-            backgroundColor:
-              buttonColor === "blue" && isClicked
-                ? "#00BFFF"
-                : buttonColors.blue,
-            cursor: buttonColorDisable ? "default" : "pointer",
-          }}
-          disabled={buttonColorDisable}
-        ></button>
+        {colors.map((color) => {
+          const isActive = buttonColor === color && isClicked;
+          const activeColor = color === "red" ? "#FF0000" : 
+                             color === "green" ? "#00FF00" : 
+                             color === "yellow" ? "#FFFF00" : "#00BFFF";
+          
+          return (
+            <ColorButton
+              key={color}
+              color={color}
+              buttonColorDisable={buttonColorDisable}
+              backgroundColor={isActive ? activeColor : buttonColors[color]}
+              handleClick={handleClick}
+            />
+          );
+        })}
       </div>
       <RulesComponent />
       <ModalRecord
