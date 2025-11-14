@@ -16,9 +16,21 @@
 .button {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.button-red {
+  border-radius: 50% 10% 10% 10%;
+}
+.button-green {
+  border-radius: 10% 50% 10% 10%;
+}
+.button-yellow {
+  border-radius: 10% 10% 10% 50%;
+}
+.button-blue {
+  border-radius: 10% 10% 50% 10%;
 }
 
 .button-iniciar {
