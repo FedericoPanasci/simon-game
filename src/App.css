@@ -13,26 +13,6 @@
   margin-bottom: 5px;
 }
 
-.button {
-  width: 150px;
-  height: 150px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.button-red {
-  border-radius: 50% 10% 10% 10%;
-}
-.button-green {
-  border-radius: 10% 50% 10% 10%;
-}
-.button-yellow {
-  border-radius: 10% 10% 10% 50%;
-}
-.button-blue {
-  border-radius: 10% 10% 50% 10%;
-}
-
 .button-iniciar {
   background-color: #FFD500;
   color: black;
@@ -54,26 +34,61 @@
 }
 
 .button-tema {
-  background-color: #008CBA;
-  border: none;
-  border-radius: 15px; 
-  color: black;
-  padding: 15px 32px;
-  font-weight: bold;
-  font-family: 'Roboto', sans-serif;
-  font-size: 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 26px;
-  margin: 4px 2px;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+
+  border: 3px solid;
   cursor: pointer;
-  transition-duration: 0.4s;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+
+  /* Para evitar que el hover se corte */
+  margin: 20px 0;
 }
 
-.button-tema:hover {
-  background-color: #005f76;
+/* ———————— TEMA CLARO ———————— */
+.button-tema.light {
+  background: #00eaff;
+  border-color: #008cff;
+  color: #ffffff;
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.4);
+
+  box-shadow: 0px 6px 20px rgba(0,180,255,0.45);
 }
+
+.button-tema.light:hover {
+  background: #37f0ff;
+  border-color: #00baff;
+
+  /* Glow más retro */
+  box-shadow: 0px 0px 18px #37f0ff, 
+              0px 0px 30px #00baff;
+
+  transform: translateY(-3px) scale(1.04);
+}
+
+/* ———————— TEMA OSCURO ———————— */
+.button-tema.dark {
+  background: #b200ff;
+  border-color: #5d00d4;
+  color: #ffffff;
+  text-shadow: 0px 2px 6px rgba(0,0,0,0.5);
+
+  box-shadow: 0px 6px 20px rgba(170,0,255,0.45);
+}
+
+.button-tema.dark:hover {
+  background: #d03fff;
+  border-color: #7a00ff;
+
+  box-shadow: 0px 0px 18px #d03fff,
+              0px 0px 30px #7a00ff;
+
+  transform: translateY(-3px) scale(1.04);
+}
+
 
 table {
   border-collapse: collapse;
