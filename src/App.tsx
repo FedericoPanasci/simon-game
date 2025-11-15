@@ -7,6 +7,7 @@ import ITableRecord from "./interface/ITableRecord";
 import ModalRecord from "./components/modalRecord/index.tsx";
 import RulesComponent from "./components/rulesComponent/index.tsx";
 import ColorButton from "./components/colorButton/index.tsx";
+import CenterButton from "./components/centerButton/index.tsx";
 
 type Color = "red" | "green" | "yellow" | "blue";
 
@@ -146,7 +147,7 @@ function App() {
     showSequence();
     setTimeout(() => {
       setButtonColorDisable(false);
-    }, (comColor.length) * 700);
+    }, comColor.length * 700);
   };
 
   const playGame = () => {
@@ -174,44 +175,48 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <button className="button-tema" onClick={() => isDarkMode()}>
-          Tema de fondo
-        </button>
-      </div>
-      <div>
-        {comColor.length > 0 ? (
-          <p
-            className="button-iniciar"
-            style={{ cursor: "default" }}
-          >{`Nivel ${levelCount}`}</p>
-        ) : (
-          <button
-            className="button-iniciar"
-            onClick={() => playGame()}
-            disabled={buttonInciar}
-          >
-            Iniciar
-          </button>
-        )}
-      </div>
+      <button
+        className={`button-tema ${darkMode ? "dark" : "light"}`}
+        onClick={isDarkMode}
+      >
+        CAMBIAR TEMA
+      </button>
+
       <div
         className="button-container"
         style={{
-          backgroundColor: darkMode ? "black" : "white",
+          // Fondo — ahora usa el violeta del botón "Tema de fondo"
+          background: darkMode ? "#6a0dad" : "#e9f2ff",
+
           borderRadius: "25%",
           width: "310px",
           height: "310px",
           marginTop: "10px",
           padding: "10px",
+          position: "relative",
+
+          // Bordes — ajustados al nuevo color base
+          border: darkMode ? "3px solid #7c20c0" : "3px solid #d0e4ff",
+
+          // Glow arcade — ajustado a juego con el violeta
+          boxShadow: darkMode
+            ? "0 0 25px 8px rgba(174, 0, 255, 0.45)" // glow violeta neón
+            : "0 0 25px 8px rgba(0, 234, 255, 0.4)", // glow cyan vibrante
+
+          transition: "background 0.4s ease, box-shadow 0.4s ease",
         }}
       >
         {colors.map((color) => {
           const isActive = buttonColor === color && isClicked;
-          const activeColor = color === "red" ? "#FF0000" : 
-                             color === "green" ? "#00FF00" : 
-                             color === "yellow" ? "#FFFF00" : "#00BFFF";
-          
+          const activeColor =
+            color === "red"
+              ? "#FF0000"
+              : color === "green"
+              ? "#00FF00"
+              : color === "yellow"
+              ? "#FFFF00"
+              : "#00BFFF";
+
           return (
             <ColorButton
               key={color}
@@ -222,13 +227,18 @@ function App() {
             />
           );
         })}
+        <CenterButton
+          comColorLength={comColor.length}
+          levelCount={levelCount}
+          buttonIniciar={buttonInciar}
+          onPlayGame={playGame}
+          darkMode={darkMode}
+        />
       </div>
-      <RulesComponent />
+      <RulesComponent darkMode={darkMode} />
       <ModalRecord
         showModal={showModal}
-        isAriaHide={false}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
         record={record}
         playerName={playerName}
         handlePlayerName={handlePlayerName}

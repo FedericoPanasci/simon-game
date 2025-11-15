@@ -1,15 +1,14 @@
 import ContainerComponent from './style.ts';
-function RulesComponent() {
+
+interface RulesComponentProps {
+  darkMode: boolean;
+}
+
+function RulesComponent({ darkMode }: RulesComponentProps) {
     return (
-        <ContainerComponent>
+        <ContainerComponent darkMode={darkMode}>
         <h2>Reglamento del Juego:</h2>
-        <ul
-          style={{
-            justifyContent: "center",
-            textAlign: "justify",
-            marginLeft: "-25px",
-          }}
-        >
+        <ul>
           <li>Haz clic en "Iniciar" para comenzar el juego.</li>
           <li>
             En cada nivel, se agregará un nuevo color a la secuencia anterior.

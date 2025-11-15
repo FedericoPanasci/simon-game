@@ -1,3 +1,4 @@
+import ButtonStyle from './style.ts';
 type Color = "red" | "green" | "yellow" | "blue";
 
 interface ColorButtonProps {
@@ -8,15 +9,16 @@ interface ColorButtonProps {
 }
 
 function ColorButton({ color, buttonColorDisable, backgroundColor, handleClick }: ColorButtonProps) {
+  const defaultColors = { red: '#6E1F1F', green: '#2E6B2E', yellow: '#7F7F24', blue: '#1E4B70' };
+  const isActive = backgroundColor !== defaultColors[color];
+  
   return (
-    <button
-      className={`button button-${color}`}
-      onClick={() => handleClick(color)}
+    <ButtonStyle
+      color={color}
+      backgroundColor={backgroundColor}
       disabled={buttonColorDisable}
-      style={{
-        backgroundColor: backgroundColor,
-        cursor: buttonColorDisable ? "default" : "pointer",
-      }}
+      isActive={isActive}
+      onClick={() => handleClick(color)}
     />
   );
 }
