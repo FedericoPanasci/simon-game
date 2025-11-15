@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Modal from 'react-modal';
-import { CloseButton, ModalForm, ModalInput, SubmitButton, CancelButton, ModalTitle, customStyles } from './style.ts';
+import { CloseButton, ModalForm, ModalInput, SubmitButton, CancelButton, ModalTitle, customStyles } from './style';
 
 interface ModalRecordProps {
   showModal: boolean;
@@ -23,7 +23,7 @@ function ModalRecord({ showModal, onRequestClose, playerName, record, handleSubm
         contentLabel="Example Modal"
       >
 
-        <ModalTitle ref={(_subtitle) => (subtitle = _subtitle)}>
+        <ModalTitle ref={(_subtitle) => { subtitle = _subtitle; }}>
           !Haz llegado a un nuevo record!
         </ModalTitle>
         <p>{`Tu secuencia llego al nivel ${record} ¿Queres registrarlo?`}</p>

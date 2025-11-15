@@ -1,5 +1,5 @@
 import ITableRecord from '../../interface/ITableRecord';
-import DivContainer from './style.ts';
+import DivContainer from './style';
 
 interface TableRecordProps {
   tableRecord: ITableRecord[];

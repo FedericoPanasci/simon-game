@@ -2,12 +2,12 @@
 /* eslint-disable no-unused-vars */
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import TableRecordComponent from "./components/tableRecord/index.tsx";
+import TableRecordComponent from "./components/tableRecord";
 import ITableRecord from "./interface/ITableRecord";
-import ModalRecord from "./components/modalRecord/index.tsx";
-import RulesComponent from "./components/rulesComponent/index.tsx";
-import ColorButton from "./components/colorButton/index.tsx";
-import CenterButton from "./components/centerButton/index.tsx";
+import ModalRecord from "./components/modalRecord";
+import RulesComponent from "./components/rulesComponent";
+import ColorButton from "./components/colorButton";
+import CenterButton from "./components/centerButton";
 
 type Color = "red" | "green" | "yellow" | "blue";
 
