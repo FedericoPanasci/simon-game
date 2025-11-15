@@ -10,6 +10,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
+    "react-scripts": "^5.0.1",
     "styled-components": "^6.1.19",
     "web-vitals": "^2.1.4"
   },
@@ -40,8 +41,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-modal": "^3.16.3",
-    "@typescript-eslint/parser": "^8.46.4",
-    "react-scripts": "^0.0.0"
+    "@typescript-eslint/parser": "^8.46.4"
   },
   "overrides": {
     "nth-check": "^2.0.1",
