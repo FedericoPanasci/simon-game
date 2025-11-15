@@ -1,4 +1,4 @@
-import ButtonStyle from './style.ts';
+import ButtonStyle from './style';
 type Color = "red" | "green" | "yellow" | "blue";
 
 interface ColorButtonProps {

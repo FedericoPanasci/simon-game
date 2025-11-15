@@ -1,4 +1,4 @@
-import ContainerComponent from './style.ts';
+import ContainerComponent from './style';
 
 interface RulesComponentProps {
   darkMode: boolean;
